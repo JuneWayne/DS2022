@@ -1,0 +1,13 @@
+#!/bin/bash
+
+clear
+echo "Time to rise and shine!"
+
+read -p "please input a picture url: " URL
+
+curl "$URL" > picture.jpg
+
+aws s3 cp picture.jpg s3://ds2022-wkt7ne/picture.jpg
+
+aws s3 presign --expires-in 604800 s3://ds2022-wkt7ne/picture.jpg
+
